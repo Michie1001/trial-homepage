@@ -52,24 +52,21 @@ h5{
     margin: 12px 0;
     font-weight: normal;
 }
-.mobile{
-    @include laptops{
-        display: none;
-    }
-}
 
-//TODO: Responsiveness
-//TODO: responsive images
-//TODO: Fix text slider in FAQ>>>>>>>>>>>>>>>>>>>..//Done
+//Remaining things to complete::
+
+//TODO: Responsiveness >>>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: Swap responsive images (large size for high res, low for low)
+//TODO: Fix text slider in FAQ >>>>>>>>>>>>>>>>>>>..//Done
 //TODO: Fix carousel >>>>>>>>>>>>>>>>>>>>>..//Done
-//TODO: fix header icons (socials and shopping cart)
-//TODO: Add proper fonts >>>>>>>>>>>>>>>>>>>>>..//Done
-//TODO: Improve buttons >>>>>>>>>>>>>>>>>>>>>..//Done
-//TODO: Images in gallery >>>>>>>>>>>>>>>>>>>..//Done
-// TODO: Linethrough footer logo >>>>>>>>>>>>>>>>>>>..//Done
-// TODO: current year in footer >>>>>>>>>>>>>>>>>>>..//Done
-// TODO: Images in gallery view more
-// TODO: fixed header bg change on scroll
+//TODO: Manipulate svg for header icons (socials and shopping cart)
+//TODO: Add specified fonts >>>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: Improve button UI >>>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: Add images to gallery section >>>>>>>>>>>>>>>>>>>..//Done
+// TODO: Add a Line-through on the footer logo >>>>>>>>>>>>>>>>>>>..//Done
+// TODO: Automatically update the current year in footer >>>>>>>>>>>>>>>>>>>..//Done
+// TODO: Gallery view more
+// TODO: Make the header bg change to $white on scroll (sticky header too)
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>HEADER Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -85,42 +82,36 @@ header{
         justify-content: space-between;
         color: $white;
         border-bottom: 1px solid #aaa;
-        padding: 0.5rem 0;
+        padding: 2rem 3rem;
         margin: 0 auto;
 
         &__socials{
-            @include display-flex;
-            margin: 0 0 0 -200px;
-            position: absolute;
+            display: none;
             img{
                 width: 3rem;
                 height: 3rem;
                 padding: 0 0.2rem;
-            }
-            .a{
-                fill: transparent;
-                color: $white;
             }
         }
 
         &__menuItems{
             display: none;
         }
-        #menuToggle {
+
+        //hamburger menu
+        #menuToggle{
             display: block;
             position: relative;
-            top: 0;
-            left: 0;
             
-            z-index: 2;
+            z-index: 3;
             
             -webkit-user-select: none;
             user-select: none;
             
             input{
                 display: block;
-                width: 26px;
-                height: 26px;
+                width: 20px;
+                height: 20px;
                 position: absolute;
                 top: -7px;
                 left: -5px;
@@ -128,13 +119,14 @@ header{
                 cursor: pointer;
                 
                 opacity: 0; /* hide this */
-                z-index: 3; /* and place it over the hamburger */
+                z-index: 4; /* and place it over the hamburger */
                 
                 -webkit-touch-callout: none;
-            }
-            span{
+              }
+
+              span{
                 display: block;
-                width: 23px;
+                width: 25px;
                 height: 3px;
                 margin-bottom: 5px;
                 position: relative;
@@ -142,63 +134,60 @@ header{
                 background: $yellow;
                 border-radius: 3px;
                 
-                z-index: 2;
+                z-index: 3;
                 
-                transform-origin: 3px 0px;
+                transform-origin: 0px 1px;
                 
                 transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                             background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                             opacity 0.55s ease;
-                
-                &:first-child{
-                    transform-origin: 0% 0%;
-                }
+            }
+        }
+        #menuToggle span:first-child{
+            transform-origin: 0% 0%;
+        }
 
-                &:nth-last-child(2){
-                    transform-origin: 0% 100%;
-                  }
-            }
-            input:checked ~ span{
-                opacity: 1;
-                transform: rotate(45deg) translate(-2px, -1px);
-                background: #232323;
-            }
-            input:checked ~ span:nth-last-child(3){
-                opacity: 0;
-                transform: rotate(0deg) scale(0.2, 0.2);
-            }
-            input:checked ~ span:nth-last-child(2){
-                transform: rotate(-45deg) translate(0, -1px);
-            }
-            input:checked ~ ul{
-                transform: none;
+        #menuToggle span:nth-last-child(2){
+            transform-origin: 0% 100%;
+        }
+
+        #menuToggle input:checked ~ span{
+            opacity: 1;
+            transform: rotate(45deg) translate(-2px, -1px);
+            background: $white;
+        }
+        #menuToggle input:checked ~ span:nth-last-child(3){
+            opacity: 0;
+            transform: rotate(0deg) scale(0.2, 0.2);
+        }
+        #menuToggle input:checked ~ span:nth-last-child(2){
+            transform: rotate(-45deg) translate(0, -1px);
+        }
+        #side-menu{
+            position: absolute;
+            width: 80vw;
+            height: auto;
+            margin: -50px 0 0 -50px;
+            padding: 5rem 1rem;
+            background: #222222;
+            list-style-type: none;
+            -webkit-font-smoothing: antialiased;
+            transform-origin: 0% 0%;
+            transform: translate(-100%, 0);
+            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+            text-align: center;
+        
+             > li{
+                margin: 5rem 0;
+                font-size: 16px;
+                color: #ffffff;
+                text-transform: uppercase;
             }
         }
 
-        #menu{
-            position: absolute;
-            width: 300px;
-            height: 100vh;
-            margin: -100px 0 0 -50px;
-            padding: 50px;
-            padding-top: 125px;
-            
-            background: #ededed;
-            list-style-type: none;
-            -webkit-font-smoothing: antialiased;
-            /* to stop flickering of text in safari */
-            
-            transform-origin: 0% 0%;
-            transform: translate(-100%, 0);
-            
-            transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-
-            li{
-                padding: 10px 0;
-                font-size: 22px;
-                transition: color 0.3s ease;
-              }
-          }
+        #menuToggle input:checked ~ ul{
+            transform: none;
+        }
 
         button{
             border: 1px solid $white;
@@ -208,14 +197,15 @@ header{
             height: auto;
             width: auto;
             margin: 0;
+            display: none;
         }
 
         @include laptops{
+            padding: 0.5rem 0;
             width: 90%;
             &__socials{
                 @include display-flex;
                 margin: 0;
-                position: relative;
                 img{
                     width: 3rem;
                     height: 3rem;
@@ -247,9 +237,21 @@ header{
                     }
                 }
             }
+            #menuToggle {
+                display: none;
+            }
+            button{
+                display: block;
+            }
         }
         @include desktops{
             width: 1300px;
+        }
+        .header__mobile-logo{
+            display: block;
+            @include laptops{
+                display: none;
+            }
         }
     }
 }
