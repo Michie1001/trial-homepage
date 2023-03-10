@@ -1,0 +1,19 @@
+@mixin display-flex {
+    display: flex;
+    align-items: center;
+}
+
+//breakpoints for the media queries from most common as documented here
+//https://www.freecodecamp.org/news/css-media-queries-breakpoints-media-types-standard-resolutions-and-more/
+
+@mixin desktops {
+    @media screen and (min-width: 1440px){@content;}
+}
+
+@mixin laptops {
+    @media screen and (min-width: 1024px){@content;}
+}
+
+@mixin tablets {
+    @media screen and (min-width: 768px){@content;}
+}

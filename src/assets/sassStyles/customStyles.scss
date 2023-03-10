@@ -1,0 +1,736 @@
+@import "_variables.scss";
+@import "_mixins.scss";
+
+::selection {
+    background: $yellow;
+    color: $white;
+    outline: $yellowHover;
+}
+.container{
+    @include display-flex;
+    color: $bodyText;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+button{
+    width: fit-content;
+    height: 3.75rem;
+    padding: 1.25rem 3rem;
+    border-radius: 30px;
+    opacity: 1;
+    text-align: center;
+    letter-spacing: 3px;
+    color: $white;
+    text-transform: uppercase;
+    border: 1px solid $yellow;
+    background: $yellow;
+    font-size: 0.938rem;
+    margin-top: 1.875rem;
+    box-shadow: 0px 2px 10px #00000033;
+    @include laptops{
+        height: 60px;
+        padding: 20px 50px;
+        font-size: 15px;
+        margin-top: 30px;
+    }
+    &:hover{
+        background-color: $yellowHover;
+        cursor: pointer;
+        box-shadow: 0px 2px 2px #00000033;
+    }
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+h5{
+    font-size: $smallText;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 12px 0;
+    font-weight: normal;
+}
+.mobile{
+    @include laptops{
+        display: none;
+    }
+}
+
+//TODO: Responsiveness
+//TODO: responsive images
+//TODO: Fix text slider in FAQ>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: Fix carousel >>>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: fix header icons (socials and shopping cart)
+//TODO: Add proper fonts >>>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: Improve buttons >>>>>>>>>>>>>>>>>>>>>..//Done
+//TODO: Images in gallery >>>>>>>>>>>>>>>>>>>..//Done
+// TODO: Linethrough footer logo >>>>>>>>>>>>>>>>>>>..//Done
+// TODO: current year in footer >>>>>>>>>>>>>>>>>>>..//Done
+// TODO: Images in gallery view more
+// TODO: fixed header bg change on scroll
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>HEADER Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+header{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100vw;
+    z-index: 2;
+    
+    .header{
+        @include display-flex;
+        justify-content: space-between;
+        color: $white;
+        border-bottom: 1px solid #aaa;
+        padding: 0.5rem 0;
+        margin: 0 auto;
+
+        &__socials{
+            @include display-flex;
+            margin: 0 0 0 -200px;
+            position: absolute;
+            img{
+                width: 3rem;
+                height: 3rem;
+                padding: 0 0.2rem;
+            }
+            .a{
+                fill: transparent;
+                color: $white;
+            }
+        }
+
+        &__menuItems{
+            display: none;
+        }
+        #menuToggle {
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0;
+            
+            z-index: 2;
+            
+            -webkit-user-select: none;
+            user-select: none;
+            
+            input{
+                display: block;
+                width: 26px;
+                height: 26px;
+                position: absolute;
+                top: -7px;
+                left: -5px;
+                
+                cursor: pointer;
+                
+                opacity: 0; /* hide this */
+                z-index: 3; /* and place it over the hamburger */
+                
+                -webkit-touch-callout: none;
+            }
+            span{
+                display: block;
+                width: 23px;
+                height: 3px;
+                margin-bottom: 5px;
+                position: relative;
+                
+                background: $yellow;
+                border-radius: 3px;
+                
+                z-index: 2;
+                
+                transform-origin: 3px 0px;
+                
+                transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                            background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                            opacity 0.55s ease;
+                
+                &:first-child{
+                    transform-origin: 0% 0%;
+                }
+
+                &:nth-last-child(2){
+                    transform-origin: 0% 100%;
+                  }
+            }
+            input:checked ~ span{
+                opacity: 1;
+                transform: rotate(45deg) translate(-2px, -1px);
+                background: #232323;
+            }
+            input:checked ~ span:nth-last-child(3){
+                opacity: 0;
+                transform: rotate(0deg) scale(0.2, 0.2);
+            }
+            input:checked ~ span:nth-last-child(2){
+                transform: rotate(-45deg) translate(0, -1px);
+            }
+            input:checked ~ ul{
+                transform: none;
+            }
+        }
+
+        #menu{
+            position: absolute;
+            width: 300px;
+            height: 100vh;
+            margin: -100px 0 0 -50px;
+            padding: 50px;
+            padding-top: 125px;
+            
+            background: #ededed;
+            list-style-type: none;
+            -webkit-font-smoothing: antialiased;
+            /* to stop flickering of text in safari */
+            
+            transform-origin: 0% 0%;
+            transform: translate(-100%, 0);
+            
+            transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+            li{
+                padding: 10px 0;
+                font-size: 22px;
+                transition: color 0.3s ease;
+              }
+          }
+
+        button{
+            border: 1px solid $white;
+            background: transparent;
+            font-size: $smallText;
+            padding: 1.5rem 4rem;
+            height: auto;
+            width: auto;
+            margin: 0;
+        }
+
+        @include laptops{
+            width: 90%;
+            &__socials{
+                @include display-flex;
+                margin: 0;
+                position: relative;
+                img{
+                    width: 3rem;
+                    height: 3rem;
+                    padding: 0 0.2rem;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+    
+            &__menuItems{
+                @include display-flex;
+                justify-content: space-evenly;
+                text-transform: uppercase;
+                font-size: $smallText;
+                letter-spacing: 3px;
+                margin: 0;
+    
+                li{
+                    margin: 0 2rem;
+                    &:hover{
+                        cursor: pointer;
+                    }
+    
+                    .logo{
+                        margin: 0 7rem;
+                        width: 8rem;
+                        height: 8rem;
+                    }
+                }
+            }
+        }
+        @include desktops{
+            width: 1300px;
+        }
+    }
+}
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>JUMBOTRON Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+.jumbotron{
+    position: relative;
+    background: #000116;
+    overflow: hidden;
+
+      
+    &__slide{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        clip-path: circle(0% at 0 50%);
+        
+        img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+      
+        &__info{
+            position: absolute;
+            @include display-flex;
+            justify-content: center;
+            color: #222;
+            width: 100%;
+            height: 100%;
+            &__block{
+                @include display-flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 90%;
+                text-align: center;
+                color: $white;
+                line-height: 1.2;
+                h1{
+                    font-size: 3rem;
+                }
+            }
+        }
+    }
+
+    
+    .active{
+        clip-path: circle(150% at 0 50%);
+        /* transition: 2s; */
+    }
+      
+    .navigation{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+      
+    .prev-btn, .next-btn{
+    z-index: 999;
+    font-size: 2em;
+    color: #222;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    cursor: pointer;
+    }
+    
+    .prev-btn{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    }
+    
+    .next-btn{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    }
+    
+    .navigation-visibility{
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    }
+    
+    .navigation-visibility .slide-icon{
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.5);
+    width: 20px;
+    height: 2px;
+    transform: translateY(-50px);
+    margin: 0 6px;
+    border-radius: 2px;
+    box-shadow: 0 5px 25px rgb(1 1 1 / 20%);
+    }
+    
+    .navigation-visibility .slide-icon.active{
+    background: $yellow;
+    }
+    
+    @include tablets{  
+        &__slide__info__block h1{
+            font-size: 4rem;
+        }
+    }
+    @include laptops{
+        height: 900px;
+        width: 100vw;
+          
+        &__slide{        
+            &__info{
+                &__block{
+                    width: 50%;
+                    text-align: center;
+                    color: $white;
+                    line-height: 1.2;
+                    h1{
+                        font-size: 52px;
+                    }
+                }
+            }
+        }
+        .navigation{
+            height: 100vh;
+        }
+        .navigation-visibility .slide-icon{
+            width: 50px;
+            height: 5px;
+        }
+    }
+      
+}
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MID SECTION Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+.midSection{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    background-color: $white;
+    height: auto;
+    text-align: center;
+    &__image{
+        height: 30rem;
+    }
+    &__info{
+        padding: 4rem 2rem;
+        width: 100vw;
+        h5{
+            color: $yellow;
+            font-size: 1.1rem;
+            width: 70%;
+            margin: 0 auto;
+        }
+        h2{
+            color: $titleText;
+            font-weight: $boldText;
+            line-height: 1.2;
+            font-size: 3rem;
+            margin: 15px 0 15px 0;
+        }
+        p{
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+    }
+
+    @include tablets{
+        &__image{
+            height: auto;
+        }
+    }
+
+    @include laptops{
+        flex-direction: row;
+        text-align: left;
+        margin-top: 1px;
+        &__image{
+            width: 50%;
+            height: auto;
+        }
+        &__info{
+            width: 50%;
+            padding: 0 0 0 70px;
+            h5{
+                font-size: $smallText;
+                width: 100%;
+                margin: 12px 0;
+            }
+            h2{
+                font-size: 3.5rem;
+                max-width: 70%;
+                margin: 15px 0 33px 0;
+            }
+            p{
+                font-size: 15px;
+                line-height: 2;
+                max-width: 75%;
+            }
+        }
+    }
+}
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FAQ SECTION Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+.faqSection{
+    background-color: $bgColor;
+    padding: 5rem 0;
+    overflow: hidden;
+    
+    &__info{
+        > div{
+            width: 100%;
+        }
+        width: 80vw;
+        margin: 0 auto;
+        text-align: center;
+        h5{
+            color: $yellow;
+            margin: 0;
+        }
+        h3{
+            color: $titleText;
+            font-weight: $boldText;
+            line-height: 1.2;
+            font-size: 3rem;
+            margin: 17px 0 24px 0;
+        }
+        .faq__cards{
+            position: relative;
+            height: 20rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &__individual{
+            position: absolute;    
+            width: 100%;
+            height: 100%;
+            clip-path: circle(0% at 0 50%);
+            p{
+                font-size: 1.5rem;
+                color: $bodyText;
+                line-height: 2;
+                font-family:"Helvetica", Helvetica, Arial, sans-serif;
+
+                &:last-of-type{
+                    font-size: 15px;
+                }
+            }
+        }
+        .active{
+            clip-path: circle(150% at 0 50%);
+            /* transition: 2s; */
+        }
+        .navigation{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            > div{
+                width: 5rem;
+            }
+        }  
+        .prev-btn, .next-btn{
+        z-index: 999;
+        padding: 10px;
+        cursor: pointer;
+        }
+        
+        .prev-btn{
+            margin-left: -4rem;
+        }
+        
+        .next-btn{
+            margin-right: -4rem;
+        }
+    }
+
+    @include tablets{
+        &__info{
+            .faq__cards{
+                height: 18rem;
+            }
+            width: 90%;
+            &__individual{
+                width: 90%;
+                p{
+                    max-width: 60%;
+                    margin: 0 auto;
+                }
+            }
+            .navigation{
+                > div{
+                    width: 10rem;
+                }
+            }
+        }
+    }
+    @include laptops{
+        &__info{
+            .faq__cards{
+                height: 14rem;
+            }
+            width: 60%;
+            h3{
+                font-size: 32px;
+                margin: 17px 0 24px 0;
+            }
+            &__individual{
+                p{
+                    max-width: 600px;
+                    margin: 0 auto;
+                    font-size: 18px;
+                    line-height: 2;
+
+                    &:last-of-type{
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Gallery Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+.gallery{
+    @include display-flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 0;
+    width: 100vw;
+    h3{
+        color: $titleText;
+        font-weight: $boldText;
+        line-height: 1.2;
+        font-size: 32px;
+        margin-bottom: 24px;
+    }
+    &__grid{    
+        display: inherit;
+        width: 100vw;
+        overflow-x: scroll;
+    }
+    &__images{
+        @include display-flex;
+        justify-content: center;
+        &__container{
+            width: 310px;
+            height: 310px;
+            margin: 1rem;
+        }
+    }
+
+    @include laptops{
+       &__grid{    
+            @include display-flex;
+            justify-content: center;
+            flex-direction: column;
+            width: auto;
+            overflow-x: hidden;
+        }
+    }
+}
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FOOTER Styles<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+.footer{
+    width: 100vw;
+    height: auto;
+    padding-top: 6rem;
+    position: relative;
+    background-color: #000000;
+    > img{
+        position: absolute;
+        opacity: 0.18
+    }
+    &__block{
+        width: 100vw;
+        margin: 0 auto;
+        color: $white;
+        @include display-flex;
+        flex-direction: column;
+        justify-content: center;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        position: relative;
+    }
+    &__logo{
+        position: absolute;
+        top: -2rem;
+    }
+    &__content{
+        display: flex;
+        align-items: start;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100vw;
+        padding-top: 1rem;
+        &__individual{
+            margin: 2rem;
+            h4{
+                font-size: 2rem;
+            }
+            li{
+                font-size: $smallText;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                margin-bottom: 1.5rem;
+                opacity: 0.8;
+            }
+            &:last-of-type{
+                @include display-flex;
+                justify-content: start;
+                flex-direction: column;
+                ul{
+                    display: flex;
+                    li{
+                        width: 40px;
+                        height: 40px;
+                        opacity: 1;
+                        margin: 0 0.3rem;
+                    }
+                }
+            }
+        }
+    }
+    &__caption{
+        font-size: $smallText;
+        opacity: 0.5;
+        max-width: 388px;
+        text-align: center;
+        line-height: 2;
+        margin-bottom: 5rem;
+    }
+    @include laptops{
+        height: 500px;
+        &__content{
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            width: 90%;
+            padding-top: 1rem;
+            &__individual{
+                margin: 2rem 4rem;
+                h4{
+                    font-size: 24px;
+                }
+                li{
+                    font-size: $smallText;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    margin-bottom: 1.5rem;
+                    opacity: 0.8;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                &:last-of-type{
+                    display: block;
+                    margin-left: auto;
+                    ul{
+                        li{
+                            width: 40px;
+                            height: 40px;
+                            opacity: 1;
+                            margin: 0 1.5rem 0 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @include desktops{
+        height: 500px;
+        &__block{
+            width: 1300px;
+        }
+    }
+}
